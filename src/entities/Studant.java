@@ -1,11 +1,10 @@
 package entities;
 
-import java.util.List;
 
 public class Studant {
 
     private int code;
-    private String name;
+    private String  name;
     private float testOne;
     private float testTwo;
     private float testThree;
