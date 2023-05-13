@@ -49,11 +49,11 @@ public class Main {
             - Exiba os dados nesse formato: <código> - <nome>*/
 
         System.out.println();
-        System.out.println("Alunos que tiraram a nota máxima");
+        System.out.println("Alunos que tiraram  nota máxima");
         System.out.println();
         for (Studant students : allStudents) {
-            float nota = (students.getTestOne() + students.getTestTwo() + students.getTestThree()) / 3;
-            if (nota == 10) {
+
+            if (students.getTestOne() == 10 || students.getTestTwo() == 10 || students.getTestThree() == 10) {
                 System.out.println(students.getCode() + " Nome :" + students.getName());
             }
         }
@@ -67,15 +67,29 @@ public class Main {
 
         double menorNota = Double.MAX_VALUE;
         for (Studant students : allStudents) {
-            float nota = (students.getTestOne() + students.getTestTwo() + students.getTestThree()) / 3;
-            if (nota < menorNota) {
-                menorNota = nota;
+
+            if (menorNota > students.getTestOne() || students.getTestTwo() > menorNota || students.getTestThree() > menorNota) {
+
+                if (students.getTestOne() < menorNota && students.getTestOne() < students.getTestTwo() && students.getTestOne() < students.getTestThree()) {
+                    menorNota = students.getTestOne();
+                } else {
+                    if (students.getTestTwo() < menorNota && students.getTestTwo() < menorNota && students.getTestTwo() < students.getTestOne() && students.getTestTwo() < students.getTestThree()) {
+                        menorNota = students.getTestTwo();
+                    } else {
+                        if (students.getTestThree() < menorNota && students.getTestThree() < menorNota && students.getTestThree() < students.getTestOne() && students.getTestThree() < students.getTestTwo()) {
+                            menorNota = students.getTestThree();
+                        }
+                    }
+                }
+
             }
+
+
         }
         for (Studant students : allStudents) {
-            float nota = (students.getTestOne() + students.getTestTwo() + students.getTestThree()) / 3;
-            if (nota == menorNota) {
-                System.out.println(students.getCode() + " Nome :" + students.getName() + " Nota  " + formatador.format(nota));
+
+            if (menorNota == students.getTestOne() || students.getTestTwo() == menorNota || students.getTestThree() == menorNota) {
+                System.out.println(students.getCode() + " Nome :" + students.getName() + " Nota  " + formatador.format(menorNota));
             }
         }
 
@@ -93,62 +107,86 @@ public class Main {
             - Exiba os dados nesse formato: <posicao> - <nome> : Nota = <nota>*/
 
         ArrayList<Float> listNota = new ArrayList<Float>();
-        float notaone = 0;
-        float notatwo = 0;
-        float notaThree = 0;
+        float notaone = Float.MIN_VALUE;
+        float notatwo = Float.MIN_VALUE;
+        float notaThree = Float.MIN_VALUE;
         for (Studant students : allStudents) {
-            float nota = (students.getTestOne() + students.getTestTwo() + students.getTestThree()) / 3;
-            if (nota > notaone) {
+            if (students.getTestOne() > notaone) {
                 notaThree = notatwo;
                 notatwo = notaone;
-                notaone = nota;
-
+                notaone = students.getTestOne();
             }
-            if (nota > notatwo && nota < notaone) {
+            if (students.getTestTwo() > notaone) {
                 notaThree = notatwo;
-                notatwo = nota;
+                notatwo = notaone;
+                notaone = students.getTestTwo();
             }
-            if (nota > notaThree && nota < notaone && nota < notatwo) {
-                notaThree = nota;
+            if (students.getTestThree() > notaone) {
+                notaThree = notatwo;
+                notatwo = notaone;
+                notaone = students.getTestThree();
+            }
+            if (students.getTestOne() > notatwo && students.getTestOne() < notaone) {
+                notaThree = notatwo;
+                notatwo = students.getTestOne();
+            }
+            if (students.getTestTwo() > notatwo && students.getTestTwo() < notaone) {
+                notaThree = notatwo;
+                notatwo = students.getTestTwo();
+            }
+            if (students.getTestThree() > notatwo && students.getTestThree() < notaone) {
+                notaThree = notatwo;
+                notatwo = students.getTestThree();
+            }
+            if (students.getTestOne() > notaThree && students.getTestOne() < notaone && students.getTestOne() < notatwo) {
+                notaThree = students.getTestOne();
+            }
+            if (students.getTestTwo() > notaThree && students.getTestTwo() < notaone && students.getTestTwo() < notatwo) {
+                notaThree = students.getTestTwo();
+            }
+            if (students.getTestThree() > notaThree && students.getTestThree() < notaone && students.getTestThree() < notatwo) {
+                notaThree = students.getTestThree();
             }
 
 
         }
+
+
         int i = 0;
 
         //
         for (Studant students : allStudents) {
-            float nota = (students.getTestOne() + students.getTestTwo() + students.getTestThree()) / 3;
-            if (nota == notaone) {
+
+            if (students.getTestOne() == notaone || students.getTestTwo() == notaone || students.getTestThree() == notaone) {
                 if (i == 0) {
-                    System.out.println(i + "º - " + students.getName() + " :" + "Nota = " + formatador.format(nota));
+                    System.out.println(i + "º - " + students.getName() + " :" + "Nota = " + formatador.format(notaone));
                     i++;
                 } else {
-                    System.out.println("  " + " - " + students.getName() + " :" + "Nota = " + formatador.format(nota));
+                    System.out.println("  " + " - " + students.getName() + " :" + "Nota = " + formatador.format(notaone));
                 }
             }
 
         }
         for (Studant students : allStudents) {
-            float nota = (students.getTestOne() + students.getTestTwo() + students.getTestThree()) / 3;
-            if (nota == notatwo) {
+
+            if (students.getTestOne() == notatwo || students.getTestTwo() == notatwo || students.getTestThree() == notatwo) {
                 if (i == 1) {
-                    System.out.println(i + "º - " + students.getName() + " :" + "Nota = " + formatador.format(nota));
+                    System.out.println(i + "º - " + students.getName() + " :" + "Nota = " + formatador.format(notatwo));
                     i++;
                 } else {
-                    System.out.println("  " + " - " + students.getName() + " :" + "Nota = " + formatador.format(nota));
+                    System.out.println("  " + " - " + students.getName() + " :" + "Nota = " + formatador.format(notatwo));
                 }
             }
 
         }
         for (Studant students : allStudents) {
-            float nota = (students.getTestOne() + students.getTestTwo() + students.getTestThree()) / 3;
-            if (nota == notaThree) {
+
+            if (students.getTestOne() == notaThree || students.getTestTwo() == notaThree || students.getTestThree() == notaThree) {
                 if (i == 2) {
-                    System.out.println(i + "º - " + students.getName() + " :" + "Nota = " + formatador.format(nota));
+                    System.out.println(i + "º - " + students.getName() + " :" + "Nota = " + formatador.format(notaThree));
                     i++;
                 } else {
-                    System.out.println("  " + " - " + students.getName() + " :" + "Nota = " + formatador.format(nota));
+                    System.out.println("  " + " - " + students.getName() + " :" + "Nota = " + formatador.format(notaThree));
                 }
             }
 
@@ -168,19 +206,41 @@ public class Main {
         float notamenor3 = Float.MAX_VALUE;
         System.out.println("Menores notas");
         for (Studant students : allStudents) {
-            float nota = (students.getTestOne() + students.getTestTwo() + students.getTestThree()) / 3;
-            if (nota < notamenor1) {
+            if (students.getTestOne() < notamenor1) {
                 notamenor3 = notamenor2;
                 notamenor2 = notamenor1;
-                notamenor1 = nota;
-
+                notamenor1 = students.getTestOne();
             }
-            if (nota < notamenor2 && nota > notamenor1) {
+            if (students.getTestTwo() < notamenor1) {
                 notamenor3 = notamenor2;
-                notamenor2 = nota;
+                notamenor2 = notamenor1;
+                notamenor1 = students.getTestTwo();
             }
-            if (nota < notamenor3 && nota > notamenor1 && nota > notamenor2) {
-                notamenor3 = nota;
+            if (students.getTestThree() < notamenor1) {
+                notamenor3 = notamenor2;
+                notamenor2 = notamenor1;
+                notamenor1 = students.getTestThree();
+            }
+            if (students.getTestOne() < notamenor2 && students.getTestOne() > notamenor1) {
+                notamenor3 = notamenor2;
+                notamenor2 = students.getTestOne();
+            }
+            if (students.getTestTwo() < notamenor2 && students.getTestTwo() > notamenor1) {
+                notamenor3 = notamenor2;
+                notamenor2 = students.getTestTwo();
+            }
+            if (students.getTestThree() < notamenor2 && students.getTestThree() > notamenor1) {
+                notamenor3 = notatwo;
+                notamenor2 = students.getTestThree();
+            }
+            if (students.getTestOne() <notamenor3 && students.getTestOne() > notamenor1 && students.getTestOne() > notamenor2) {
+                notamenor3 = students.getTestOne();
+            }
+            if (students.getTestTwo() < notamenor3 && students.getTestTwo() > notamenor1 && students.getTestTwo() > notamenor2) {
+                notamenor3 = students.getTestTwo();
+            }
+            if (students.getTestThree() <  notamenor3 && students.getTestThree() > notamenor1 && students.getTestThree() > notamenor2) {
+                notamenor3 = students.getTestThree();
             }
 
 
@@ -190,38 +250,37 @@ public class Main {
 
         //
         for (Studant students : allStudents) {
-            float nota = (students.getTestOne() + students.getTestTwo() + students.getTestThree()) / 3;
-            if (nota == notamenor1) {
+            if (students.getTestOne() == notamenor1 ||students.getTestTwo() == notamenor1 || students.getTestThree() == notamenor1) {
                 if (j == 0) {
-                    System.out.println(j + "º - " + students.getName() + " :" + "Nota = " + formatador.format(nota));
+                    System.out.println(j + "º - " + students.getName() + " :" + "Nota = " + formatador.format(notamenor1));
                     j++;
                 } else {
-                    System.out.println("  " + " - " + students.getName() + " :" + "Nota = " + formatador.format(nota));
+                    System.out.println("  " + " - " + students.getName() + " :" + "Nota = " + formatador.format(notamenor1));
+                }
+            }
+
+        }
+        for (Studant students : allStudents) {
+
+            if (students.getTestOne() == notamenor2 ||students.getTestTwo() == notamenor2 || students.getTestThree() == notamenor2) {
+                if (j == 1) {
+                    System.out.println(j + "º - " + students.getName() + " :" + "Nota = " + formatador.format(notamenor2));
+                    j++;
+                } else {
+                    System.out.println("  " + " - " + students.getName() + " :" + "Nota = " + formatador.format(notamenor2));
                 }
             }
 
         }
         for (
                 Studant students : allStudents) {
-            float nota = (students.getTestOne() + students.getTestTwo() + students.getTestThree()) / 3;
-            if (nota == notamenor2) {
-                if (j == 1) {
-                    System.out.println(j + "º - " + students.getName() + " :" + "Nota = " + formatador.format(nota));
-                    j++;
-                } else {
-                    System.out.println("  " + " - " + students.getName() + " :" + "Nota = " + formatador.format(nota));
-                }
-            }
 
-        }
-        for (Studant students : allStudents) {
-            float nota = (students.getTestOne() + students.getTestTwo() + students.getTestThree()) / 3;
-            if (nota == notamenor3) {
+            if (students.getTestOne() == notamenor3 ||students.getTestTwo() == notamenor3 || students.getTestThree() == notamenor3) {
                 if (j == 2) {
-                    System.out.println(j + "º - " + students.getName() + " :" + "Nota = " + formatador.format(nota));
+                    System.out.println(j + "º - " + students.getName() + " :" + "Nota = " + formatador.format(notamenor3));
                     j++;
                 } else {
-                    System.out.println("  " + " - " + students.getName() + " :" + "Nota = " + formatador.format(nota));
+                    System.out.println("  " + " - " + students.getName() + " :" + "Nota = " + formatador.format(notamenor3));
                 }
             }
 
@@ -236,12 +295,14 @@ public class Main {
         System.out.println("Exercício 7");
         System.out.println();
         ArrayList<Float> listNotas = new ArrayList<Float>();
-        for (Studant students : allStudents) {
+        for (
+                Studant students : allStudents) {
             float nota = (students.getTestOne() + students.getTestTwo() + students.getTestThree()) / 3;
 
             listNotas.add(nota);
 
         }
+
         int k = 0;
         int l = 0;
         Collections.sort(listNotas, Collections.reverseOrder());
