@@ -1,0 +1,7 @@
+package enums;
+
+public enum ClassEnum {
+	HIGH_SCHOOL_FIRST_YEAR,
+	HIGH_SCHOOL_SECOND_YEAR,
+	HIGH_SCHOOL_THIRD_YEAR,
+}
